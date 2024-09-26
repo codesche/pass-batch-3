@@ -1,6 +1,14 @@
 spring:
-  database:
-    url: jdbc:h2:mem:mydb
-    username: pass_local
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3307/pass_local?zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: pass_local_user
     password: passlocal123
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20     # pool에 보관 가능한 최대 connection 수
+
+  batch:
+    jdbc:
+      # Batch에 사용되는 SQL 초기화 스크립트를 실행. 임베디드인 경우에는 기본적으로 실행하는데, always 설정을 하면 임베디드 타입처럼 항상 활성화시킬 수 있다.
+      # 초기 수행 이후에는 off 해도 된다.
+      initialize-schema: always
